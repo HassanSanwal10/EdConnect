@@ -1,2 +1,0 @@
-# EdConnect
- Tutor finding app
