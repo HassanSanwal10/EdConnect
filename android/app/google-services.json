@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "197655043621",
+    "project_id": "edconnect-91c64",
+    "storage_bucket": "edconnect-91c64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197655043621:android:ced9c1eb0e01587d6229cc",
+        "android_client_info": {
+          "package_name": "com.android.edconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoUHoHrR7tvuSo8H_u8dOTVnnCZCYevRA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

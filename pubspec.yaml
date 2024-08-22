@@ -18,6 +18,9 @@ dependencies:
   introduction_screen: ^3.1.14
   lottie: ^3.1.2
 
+  firebase_auth: ^5.1.4
+  cloud_firestore: ^5.2.1
+
 flutter_icons:
   android: true
   ios: true
