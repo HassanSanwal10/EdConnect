@@ -9,17 +9,21 @@ class CustomTextField extends StatelessWidget {
   final String? hintText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final bool? isReadOnly;
+  final Function? givenOnTap;
 
   const CustomTextField(
       {super.key,
       required this.controller,
       this.keyboardType = TextInputType.text,
       this.isObscureText = false,
+      this.isReadOnly = false,
       this.obscureCharacter = '*',
       required this.labelText,
       required this.hintText,
       this.prefixIcon,
-      this.suffixIcon});
+      this.suffixIcon,
+      this.givenOnTap});
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -27,6 +31,8 @@ class CustomTextField extends StatelessWidget {
       keyboardType: keyboardType,
       obscureText: isObscureText!,
       obscuringCharacter: obscureCharacter!,
+      readOnly: isReadOnly!,
+      onTap: () => givenOnTap,
       decoration: InputDecoration(
         contentPadding:
             const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0),

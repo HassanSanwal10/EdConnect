@@ -1,5 +1,5 @@
 import 'package:edconnect/class/theme_setting.dart';
-import 'package:edconnect/pages/signup_teacher/signup_teacher_3.dart';
+import 'package:edconnect/pages/signup_all/signup_teacher/signup_teacher_3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

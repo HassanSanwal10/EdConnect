@@ -1,4 +1,5 @@
 import 'package:edconnect/class/theme_setting.dart';
+import 'package:edconnect/pages/home_page.dart';
 import 'package:edconnect/pages/splashscreens/on_boarding_page.dart';
 import 'package:edconnect/themes/dark_mode.dart';
 import 'package:edconnect/themes/light_mode.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeSettings.isDarkModeOn ? darkMode : lightMode,
-      home: const OnBoardingPage(),
+      home: const HomePage(),
     );
   }
 }
