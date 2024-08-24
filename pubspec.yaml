@@ -22,13 +22,8 @@ dependencies:
   introduction_screen: ^3.1.14
   lottie: ^3.1.2
 
-<<<<<<< Updated upstream
-  firebase_auth: ^5.1.4
-  cloud_firestore: ^5.2.1
   firebase_core: ^3.3.0
 
-=======
->>>>>>> Stashed changes
 flutter_icons:
   android: true
   ios: true
