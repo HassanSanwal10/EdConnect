@@ -2,9 +2,12 @@ import 'package:edconnect/class/theme_setting.dart';
 import 'package:edconnect/pages/splashscreens/on_boarding_page.dart';
 import 'package:edconnect/themes/dark_mode.dart';
 import 'package:edconnect/themes/light_mode.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
