@@ -1,5 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:edconnect/pages/splashscreens/on_boarding_page.dart';
+import 'package:edconnect/screens/splashscreens/on_boarding_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:edconnect/class/theme_setting.dart';
-import 'package:edconnect/pages/signup_all/signup_teacher/signup_teacher_5.dart';
+import 'package:edconnect/screens/signup_all/signup_teacher/signup_teacher_5.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';

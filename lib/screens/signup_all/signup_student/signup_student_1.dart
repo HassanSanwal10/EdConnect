@@ -1,4 +1,4 @@
-import 'package:edconnect/pages/signup_all/signup_student/signup_student_2.dart';
+import 'package:edconnect/screens/signup_all/signup_student/signup_student_2.dart';
 import 'package:edconnect/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

@@ -1,7 +1,8 @@
 import 'package:edconnect/class/theme_setting.dart';
-import 'package:edconnect/pages/home_page.dart';
-import 'package:edconnect/themes/dark_mode.dart';
-import 'package:edconnect/themes/light_mode.dart';
+//import 'package:edconnect/screens/home_page.dart';
+import 'package:edconnect/screens/welcome_screen.dart';
+import 'package:edconnect/theme/dark_mode.dart';
+import 'package:edconnect/theme/light_mode.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeSettings.isDarkModeOn ? darkMode : lightMode,
-      home: const HomePage(),
+      home: const WelcomeScreen(),
     );
   }
 }

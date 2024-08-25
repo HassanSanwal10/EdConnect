@@ -11,22 +11,26 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final bool? isReadOnly;
   final Function? givenOnTap;
+  final String? Function(String?)? validator;
 
-  const CustomTextField(
-      {super.key,
-      required this.controller,
-      this.keyboardType = TextInputType.text,
-      this.isObscureText = false,
-      this.isReadOnly = false,
-      this.obscureCharacter = '*',
-      required this.labelText,
-      required this.hintText,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.givenOnTap});
+  const CustomTextField({
+    super.key,
+    required this.controller,
+    this.keyboardType = TextInputType.text,
+    this.isObscureText = false,
+    this.isReadOnly = false,
+    this.obscureCharacter = '*',
+    required this.labelText,
+    required this.hintText,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.givenOnTap,
+    this.validator,
+  });
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: validator,
       controller: controller,
       keyboardType: keyboardType,
       obscureText: isObscureText!,

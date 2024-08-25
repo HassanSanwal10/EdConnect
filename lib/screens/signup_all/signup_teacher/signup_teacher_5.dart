@@ -1,5 +1,5 @@
 import 'package:edconnect/class/theme_setting.dart';
-import 'package:edconnect/pages/login/login_page.dart';
+import 'package:edconnect/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -156,7 +156,7 @@ class SignupTeacher5 extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (_) => const LoginPage()),
+                    MaterialPageRoute(builder: (_) => const LoginScreen()),
                     (route) => false);
               },
               child: const Text('OK'),

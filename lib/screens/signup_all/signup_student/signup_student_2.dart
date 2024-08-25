@@ -1,4 +1,4 @@
-import 'package:edconnect/pages/signup_all/signup_student/signup_student_3.dart';
+import 'package:edconnect/screens/signup_all/signup_student/signup_student_3.dart';
 import 'package:flutter/material.dart';
 
 class SignupStudent2 extends StatefulWidget {
