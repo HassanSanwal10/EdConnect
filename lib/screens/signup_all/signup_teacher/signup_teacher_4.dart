@@ -1,9 +1,11 @@
-import 'package:edconnect/class/theme_setting.dart';
 import 'package:edconnect/screens/signup_all/signup_teacher/signup_teacher_5.dart';
+import 'package:edconnect/theme/dark_mode.dart';
+import 'package:edconnect/theme/light_mode.dart';
+import 'package:edconnect/widgets/custom_scaffold.dart';
+import 'package:edconnect/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io'; // Import this package
+import 'dart:io';
 
 class SignupTeacher4 extends StatefulWidget {
   const SignupTeacher4({super.key});
@@ -25,113 +27,116 @@ class _SignupTeacher4State extends State<SignupTeacher4> {
     });
   }
 
+  void _validateAndProceed() {
+    if (_profilePhoto == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please upload a profile picture.'),
+        ),
+      );
+    } else {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => const SignupTeacher5()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        title: const Text(
-          'Just a little more...',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
-        ),
-        elevation: 01,
-        forceMaterialTransparency: true,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness:
-              ThemeSettings.isDarkModeOn ? Brightness.light : Brightness.dark,
-        ),
-        leading: Row(
-          children: [
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                size: 40,
+    bool isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
+
+    return CustomScaffold(
+      bgColor: isDarkMode
+          ? darkMode.scaffoldBackgroundColor
+          : lightMode.scaffoldBackgroundColor,
+      newChild: Column(
+        children: [
+          Expanded(
+            flex: 1,
+            child: SizedBox(
+              width: 200,
+              child: Image.asset(
+                'assets/images/edconnect_w.png',
+                alignment: Alignment.center,
               ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
             ),
-          ],
-        ),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 16, left: 32, right: 32),
-            child: Column(
-              children: [
-                // Upload Profile Photo
-                Center(
-                  child: GestureDetector(
-                    onTap: _pickImage,
-                    child: CircleAvatar(
-                      radius: 80,
-                      backgroundImage: _profilePhoto != null
-                          ? FileImage(File(_profilePhoto!.path))
-                          : null,
-                      child: _profilePhoto == null
-                          ? const Icon(
-                              Icons.add_a_photo,
-                              size: 80,
-                            )
-                          : null,
-                    ),
-                  ),
+          ),
+          Expanded(
+            flex: 9,
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(25, 20, 25, 20),
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                color: isDarkMode
+                    ? darkMode.scaffoldBackgroundColor
+                    : lightMode.scaffoldBackgroundColor,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(40.0),
+                  topRight: Radius.circular(40.0),
                 ),
-                const SizedBox(height: 20.0),
-                // About Me (Short Bio)
-                TextField(
-                  controller: _bioController,
-                  minLines: 1,
-                  maxLines: 5,
-                  decoration: const InputDecoration(
-                    labelText: 'About Me',
-                    hintText: 'Write a brief intro about yourself',
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 2),
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Profile Picture/Bio',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green, width: 3),
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                    const SizedBox(height: 15),
+                    GestureDetector(
+                      onTap: _pickImage,
+                      child: CircleAvatar(
+                        radius: 80,
+                        backgroundImage: _profilePhoto != null
+                            ? FileImage(File(_profilePhoto!.path))
+                            : null,
+                        child: _profilePhoto == null
+                            ? const Icon(
+                                Icons.add_a_photo,
+                                size: 80,
+                              )
+                            : null,
+                      ),
                     ),
-                    //prefixIcon: Icon(Icons.email),
-                  ),
-                ),
-                const SizedBox(height: 20.0),
-                // Next Button
-                SizedBox(
-                  width: 150,
-                  height: 60,
-                  child: FilledButton(
-                    style: ButtonStyle(
-                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(15.0), // Rounded corners
+                    const SizedBox(height: 20.0),
+                    CustomTextField(
+                      controller: _bioController,
+                      labelText: 'About Me',
+                      hintText: 'Write a brief intro about yourself',
+                      minLin: 1,
+                      maxLin: 5,
+                    ),
+                    const SizedBox(height: 25.0),
+                    SizedBox(
+                      width: 150,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          shape:
+                              WidgetStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                          ),
+                        ),
+                        onPressed: _validateAndProceed,
+                        child: const Text(
+                          'Next',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (_) => const SignupTeacher5()),
-                      );
-                    },
-                    child: const Text(
-                      'Next',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                    ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

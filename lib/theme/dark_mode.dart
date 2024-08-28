@@ -5,7 +5,7 @@ ThemeData darkMode = ThemeData(
     surface: Color(0xFF081C15), // Very dark green background
     primary:
         Color(0xFF40916C), // Dark green for primary elements (e.g., buttons)
-    secondary: Color(0xFF2D6A4F), // Deep green for secondary elements
+    secondary: Color(0xFF1B4332), // Deep green for secondary elements
     tertiary:
         Color(0xFF40916C), // Rich green for tertiary elements (e.g., accents)
     inversePrimary:

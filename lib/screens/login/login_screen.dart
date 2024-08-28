@@ -1,6 +1,6 @@
-import 'package:edconnect/screens/forgot_password_screen.dart';
-import 'package:edconnect/screens/home_page.dart';
-import 'package:edconnect/screens/signup_all/sign_up_screen.dart';
+import 'package:edconnect/screens/login/forgot_password_screen.dart';
+import 'package:edconnect/screens/home/home_page.dart';
+import 'package:edconnect/screens/signup_all/sign_up_screen_1.dart';
 import 'package:edconnect/theme/dark_mode.dart';
 import 'package:edconnect/theme/light_mode.dart';
 import 'package:edconnect/widgets/custom_scaffold.dart';
@@ -35,10 +35,14 @@ class _LoginScreenState extends State<LoginScreen> {
           : lightMode.scaffoldBackgroundColor,
       newChild: Column(
         children: [
-          const Expanded(
+          Expanded(
             flex: 1,
             child: SizedBox(
-              height: 10,
+              width: 200,
+              child: Image.asset(
+                'assets/images/edconnect_w.png',
+                alignment: Alignment.center,
+              ),
             ),
           ),
           Expanded(
@@ -125,20 +129,21 @@ class _LoginScreenState extends State<LoginScreen> {
                               const Text(
                                 'Remember me',
                                 style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                                    fontSize: 12, fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) =>
-                                      const ForgotPasswordScreen()));
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (_) =>
+                                          const ForgotPasswordScreen()));
                             },
                             child: const Text(
                               'Forgot Password?',
                               style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
+                                  fontSize: 12, fontWeight: FontWeight.bold),
                             ),
                           )
                         ],
@@ -161,11 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () {
                             if (_formLogInKey.currentState!.validate() &&
                                 _agreePersonalData) {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                content: Text('Processing Data...'),
-                              ));
-                              Navigator.of(context).push(
+                              Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder: (_) => const HomePage()),
                               );
@@ -185,6 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       const SizedBox(height: 15),
+                      //or login with text and fivider
                       const Row(
                         children: [
                           Expanded(child: Divider()),
@@ -226,7 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               onPressed: () {
                                 Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                      builder: (_) => const SignUpScreen()),
+                                      builder: (_) => const SignUpScreen1()),
                                 );
                               },
                               child: const Text(

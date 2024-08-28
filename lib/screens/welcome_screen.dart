@@ -1,5 +1,5 @@
 import 'package:edconnect/screens/login/login_screen.dart';
-import 'package:edconnect/screens/signup_all/sign_up_screen.dart';
+import 'package:edconnect/screens/signup_all/sign_up_screen_1.dart';
 import 'package:edconnect/theme/dark_mode.dart';
 import 'package:edconnect/theme/light_mode.dart';
 import 'package:edconnect/widgets/custom_scaffold.dart';
@@ -29,16 +29,9 @@ class WelcomeScreen extends StatelessWidget {
                   text: const TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Welcome\n',
+                        text: 'Welcome User\n',
                         style: TextStyle(
-                          fontSize: 45,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'To EdConnect\n',
-                        style: TextStyle(
-                          fontSize: 45,
+                          fontSize: 35,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -72,7 +65,7 @@ class WelcomeScreen extends StatelessWidget {
                     color: Colors.white,
                     textColor: lightMode.primaryColor,
                     buttonText: 'Sign Up',
-                    onTap: const SignUpScreen(),
+                    onTap: const SignUpScreen1(),
                   )),
                 ],
               ),

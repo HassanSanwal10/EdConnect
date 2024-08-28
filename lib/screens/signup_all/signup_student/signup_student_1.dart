@@ -1,4 +1,7 @@
 import 'package:edconnect/screens/signup_all/signup_student/signup_student_2.dart';
+import 'package:edconnect/theme/dark_mode.dart';
+import 'package:edconnect/theme/light_mode.dart';
+import 'package:edconnect/widgets/custom_scaffold.dart';
 import 'package:edconnect/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -12,9 +15,11 @@ class SignupStudent1 extends StatefulWidget {
 
 class _SignupStudent1State extends State<SignupStudent1> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
-  final TextEditingController _locationController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _postalCodeController = TextEditingController();
   String? _selectedGender;
 
   Future<void> _selectDate(BuildContext context) async {
@@ -33,111 +38,166 @@ class _SignupStudent1State extends State<SignupStudent1> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('student sign up 1'),
-          forceMaterialTransparency: true,
-          leading: Row(
-            children: [
-              IconButton(
-                icon: const Icon(
-                  Icons.arrow_back,
-                  size: 40,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+    bool isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
+
+    return CustomScaffold(
+      bgColor: isDarkMode
+          ? darkMode.scaffoldBackgroundColor
+          : lightMode.scaffoldBackgroundColor,
+      newChild: Column(
+        children: [
+          Expanded(
+            flex: 1,
+            child: SizedBox(
+              width: 200,
+              child: Image.asset(
+                'assets/images/edconnect_w.png',
+                alignment: Alignment.center,
               ),
-            ],
+            ),
           ),
-        ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Full Name Field
-                    CustomTextField(
-                        controller: _nameController,
-                        labelText: 'Full Name',
-                        hintText: 'Enter your full name'),
-
-                    const SizedBox(height: 16.0),
-
-                    // Date of Birth Field
-
-                    CustomTextField(
-                      controller: _dobController,
-                      labelText: 'Date of Birth',
-                      hintText: 'Select your birth date',
-                      isReadOnly: true,
-                      givenOnTap: () => _selectDate(context),
-                    ),
-                    TextField(
-                      controller: _dobController,
-                      readOnly: true,
-                      onTap: () => _selectDate(context),
-                      decoration: InputDecoration(
+          Expanded(
+            flex: 9,
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(25, 20, 25, 20),
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                color: isDarkMode
+                    ? darkMode.scaffoldBackgroundColor
+                    : lightMode.scaffoldBackgroundColor,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(40.0),
+                  topRight: Radius.circular(40.0),
+                ),
+              ),
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Personal Details',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 26,
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      // first Name Field
+                      CustomTextField(
+                        keyboardType: TextInputType.name,
+                        controller: _firstNameController,
+                        labelText: 'First Name',
+                        hintText: 'Enter your First name',
+                      ),
+                      const SizedBox(height: 15),
+                      // last Name Field
+                      CustomTextField(
+                        keyboardType: TextInputType.name,
+                        controller: _lastNameController,
+                        labelText: 'Last Name',
+                        hintText: 'Enter your Last name',
+                      ),
+                      const SizedBox(height: 15),
+                      // Date of Birth Field
+                      CustomTextField(
+                        keyboardType: TextInputType.datetime,
+                        controller: _dobController,
                         labelText: 'Date of Birth',
                         hintText: 'Select your birth date',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
+                        isReadOnly: true,
+                        givenOnTap: () => _selectDate(context),
                       ),
-                    ),
-                    const SizedBox(height: 16.0),
-
-                    // Gender Dropdown
-                    DropdownButtonFormField<String>(
-                      value: _selectedGender,
-                      items: ['Male', 'Female', 'Other']
-                          .map((gender) => DropdownMenuItem<String>(
-                                value: gender,
-                                child: Text(gender),
-                              ))
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedGender = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'Gender',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
+                      const SizedBox(height: 15),
+                      // Gender Dropdown
+                      DropdownButtonFormField<String>(
+                        value: _selectedGender,
+                        items: ['Male', 'Female', 'Other']
+                            .map((gender) => DropdownMenuItem<String>(
+                                  value: gender,
+                                  child: Text(gender),
+                                ))
+                            .toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedGender = value;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Gender',
+                          labelStyle:
+                              const TextStyle(fontWeight: FontWeight.bold),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
                         ),
+                        selectedItemBuilder: (BuildContext context) {
+                          return const [
+                            Text(
+                              'Male',
+                              style: TextStyle(
+                                color: Colors
+                                    .blue, // Custom color for selected item
+                              ),
+                            ),
+                            Text(
+                              'Female',
+                              style: TextStyle(
+                                color: Colors
+                                    .pink, // Custom color for selected item
+                              ),
+                            ),
+                            Text(
+                              'Other',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ];
+                        },
                       ),
-                    ),
-                    const SizedBox(height: 16.0),
-
-                    // Location Field
-                    CustomTextField(
-                        controller: _locationController,
-                        labelText: 'Location',
-                        hintText: 'Enter your city, state, and country'),
-
-                    const SizedBox(height: 24.0),
-
-                    // Next Button
-                    Center(
-                      child: SizedBox(
-                        width: 150,
+                      const SizedBox(height: 15),
+                      // Location Field
+                      CustomTextField(
+                        keyboardType: TextInputType.streetAddress,
+                        controller: _addressController,
+                        labelText: 'Address',
+                        hintText: 'Enter your Address',
+                      ),
+                      const SizedBox(height: 15),
+                      // Postal Code Field
+                      CustomTextField(
+                        keyboardType: TextInputType.number,
+                        controller: _postalCodeController,
+                        labelText: 'Postal Code',
+                        hintText: 'Enter your Postal Code',
+                      ),
+                      const SizedBox(height: 25),
+                      // Next Button
+                      SizedBox(
                         height: 50,
+                        width: 150,
                         child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
+                          style: ButtonStyle(
+                            shape:
+                                WidgetStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
                             ),
                           ),
                           onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (_) => const SignupStudent2()),
-                            );
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => const SignupStudent2(),
+                                ),
+                              );
+                            }
                           },
                           child: const Text(
                             'Next',
@@ -148,12 +208,14 @@ class _SignupStudent1State extends State<SignupStudent1> {
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ));
+        ],
+      ),
+    );
   }
 }
